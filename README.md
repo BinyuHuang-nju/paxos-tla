@@ -8,4 +8,4 @@
 	- TLA+ toolbox
 
 ## Reference 
- 	The experiment refers to the code from [here](http://github.com/Starydark/PaxosStore-tla)
+ 	The experiment refers to the code from [here](https://github.com/Starydark/PaxosStore-tla).
