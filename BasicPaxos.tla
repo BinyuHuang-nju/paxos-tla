@@ -1,4 +1,4 @@
----------------------------- MODULE BasicPaxos0 ----------------------------
+----------------------------- MODULE BasicPaxos -----------------------------
 EXTENDS Integers, FiniteSets
 
 
@@ -99,11 +99,8 @@ ChosenSet == {v \in Value: \E b \in Ballot:
 \* And it should be false, because Paxos does not satisfy liveness
 Liveness == <>(ChosenSet /= {})
 
-=============================================================================
-\* Create on 1/11/2021
-
 
 =============================================================================
 \* Modification History
-\* Last modified Wed Jan 13 17:00:17 CST 2021 by Dell
-\* Created Tue Jan 12 17:39:42 CST 2021 by Dell
+\* Last modified Wed Jan 13 20:14:22 CST 2021 by Dell
+\* Created Wed Jan 13 17:10:09 CST 2021 by Dell
