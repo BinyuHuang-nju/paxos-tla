@@ -66,6 +66,7 @@ Accept(b) == /\ ~\E m \in msgs: m.type = "accept" /\ m.bal = b
 
 Accepted(acc) == \E msg \in msgs:  /\ msg.type = "accept"
                                    /\ state[acc].maxBal <= msg.bal
+                                   /\ state[acc].maxVBal < msg.bal
                                    /\ state' = [state EXCEPT ![acc].maxBal = msg.bal,
                                                              ![acc].maxVBal = msg.bal,
                                                              ![acc].maxVVal = msg.val]
@@ -91,11 +92,18 @@ Chosen(v) == \E b \in Ballot: ChosenIn(v,b)
 \* Only a value is chosen in a ballot
 Consistency == \A v1,v2 \in Value: Chosen(v1) /\ Chosen(v2) => (v1 = v2)
 
+ChosenSet == {v \in Value: \E b \in Ballot:
+                               \E Q \in Quorums: \A a \in Q: /\ state[a].maxVBal = b
+                                                             /\ state[a].maxVVal = v}
+\* There exists some value being chosen eventually
+\* And it should be false, because Paxos does not satisfy liveness
+Liveness == <>(ChosenSet /= {})
+
 =============================================================================
 \* Create on 1/11/2021
 
 
 =============================================================================
 \* Modification History
-\* Last modified Tue Jan 12 17:40:19 CST 2021 by Dell
+\* Last modified Wed Jan 13 17:00:17 CST 2021 by Dell
 \* Created Tue Jan 12 17:39:42 CST 2021 by Dell
